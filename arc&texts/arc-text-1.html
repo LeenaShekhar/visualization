@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+
+</style>
+<title>Placing text on an ARC</title>
+<script type="text/javascript" src="d3.min.js">
+</script>
+</head>
+
+<body>
+<script type="text/javascript">
+
+//create svg
+var svg = d3.select("body").append("svg")
+            .attr("width", 500)
+            .attr("height", 520);
+//create svg path
+var path = svg.append("path")
+    .attr("id", "wavy")
+    .attr("d", "M0,300 A200,200 0 0,1 400,300")
+    .style("fill", "#e7e1ef")
+    .style("stroke", "#e7e1ef");
+
+var textArc = svg.append("text")
+    .append("textPath")
+    .attr("xlink:href", "#wavy")
+    .style("text-anchor", "middle")
+    .attr("startOffset", "50%")
+    .attr("font-family", "monospace")
+    .attr("font-size", "20px")
+    .style("fill", "#dd1c77")
+    .text("I'm on top of the World!");
+
+function repeat() {
+              path
+              .transition().duration(2000)
+             
+              .attr("d", "M50,300 A150,150 0 0,1 350,300")
+              .transition().duration(2000)
+              
+              .attr("d", "M0,300 A200,200 0 0,1 400,300")
+              .on("end", repeat);
+        }
+        
+        repeat();
+
+</script>
+</body>
